@@ -25,9 +25,12 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         ogify: {
-          primary: "#1A1F2C",
-          accent: "#3B82F6",
-          light: "#222222",
+          primary: "#000000",
+          accent: "#8B5CF6",
+          light: "#111111",
+          secondary: "#D946EF",
+          tertiary: "#F97316",
+          quaternary: "#0EA5E9",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
