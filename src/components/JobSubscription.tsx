@@ -3,15 +3,15 @@ import { ExternalLink } from "lucide-react";
 
 const JobSubscription = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-ogify-primary">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Available Positions</h2>
-          <p className="text-gray-600 mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Available Positions</h2>
+          <p className="text-gray-400 mb-8">
             Stay updated with our latest job opportunities by subscribing to our careers sheet.
           </p>
           <Button
-            className="inline-flex items-center gap-2"
+            className="inline-flex items-center gap-2 bg-ogify-accent hover:bg-blue-600"
             onClick={() => window.open('https://docs.google.com/spreadsheets/create', '_blank')}
           >
             Subscribe to Job Updates
