@@ -26,17 +26,23 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-20 bg-ogify-light">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+    <section className="py-32 bg-ogify-light relative overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(59,130,246,0.05)_50%,transparent_75%)] bg-[length:20px_20px]"></div>
+      <div className="container mx-auto px-4 relative z-10">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
           Our Services
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow bg-ogify-primary border-gray-700">
+            <Card 
+              key={index} 
+              className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-ogify-primary border-gray-700 hover:border-ogify-accent group"
+            >
               <CardHeader>
-                <service.icon className="w-12 h-12 text-ogify-accent mb-4" />
-                <CardTitle className="text-white">{service.title}</CardTitle>
+                <div className="w-16 h-16 rounded-2xl bg-ogify-accent/10 flex items-center justify-center mb-6 group-hover:bg-ogify-accent/20 transition-colors">
+                  <service.icon className="w-8 h-8 text-ogify-accent" />
+                </div>
+                <CardTitle className="text-white text-xl">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-400">{service.description}</p>
