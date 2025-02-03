@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-3xl animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-            Transform Your Business with{" "}
+            <span className="text-white">Transform Your Business with</span>{" "}
             <span className="bg-gradient-to-r from-ogify-accent via-ogify-secondary to-ogify-tertiary text-transparent bg-clip-text">
               Expert IT Consulting
             </span>
