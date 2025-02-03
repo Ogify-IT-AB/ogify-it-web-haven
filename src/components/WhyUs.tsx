@@ -3,7 +3,7 @@ import { CheckCircle } from "lucide-react";
 const reasons = [
   "20+ years of industry experience",
   "Certified IT professionals",
-  "24/7 support and maintenance",
+  "We specialize in managing projects",
   "Customized solutions for your business",
   "Proven track record of success",
   "Competitive pricing",

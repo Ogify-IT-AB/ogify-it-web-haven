@@ -11,17 +11,20 @@ const Footer = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
-            <p className="text-gray-300">Email: contact@ogifyit.com</p>
-            <p className="text-gray-300">Phone: (555) 123-4567</p>
+            <p className="text-gray-300">Email: info@ogify.se</p>
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Address</h3>
             <p className="text-gray-300">
-              123 Business Avenue
+              Ogify IT AB
               <br />
-              Suite 456
+              Org number: 559265-5467
               <br />
-              New York, NY 10001
+              Norregatan 4b
+              <br />
+              211 27
+              <br />
+              Malmö
             </p>
           </div>
         </div>
