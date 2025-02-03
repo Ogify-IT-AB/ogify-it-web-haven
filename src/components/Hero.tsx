@@ -12,11 +12,14 @@ const Hero = () => {
       />
       <div className="container mx-auto px-4 z-10">
         <div className="flex justify-center mb-12">
-          <img 
-            src="/lovable-uploads/1074d673-bf80-498e-8c38-12af51351c37.png" 
-            alt="OGIFY Logo" 
-            className="h-16 md:h-20"
-          />
+          <div className="relative group">
+            <img 
+              src="/lovable-uploads/1074d673-bf80-498e-8c38-12af51351c37.png" 
+              alt="OGIFY Logo" 
+              className="h-16 md:h-20 transition-all duration-500 hover:scale-105 drop-shadow-[0_0_15px_rgba(83,189,164,0.3)]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-ogify-accent/20 to-ogify-secondary/20 rounded-full blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
         </div>
         <div className="max-w-3xl mx-auto animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight text-center">

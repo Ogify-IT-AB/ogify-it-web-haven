@@ -14,11 +14,14 @@ const Team = () => {
       <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(139,92,246,0.05)_50%,transparent_75%)] bg-[length:20px_20px]"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex items-center justify-center mb-16 gap-4">
-          <img 
-            src="/lovable-uploads/1074d673-bf80-498e-8c38-12af51351c37.png" 
-            alt="OGIFY Logo" 
-            className="h-12"
-          />
+          <div className="relative group">
+            <img 
+              src="/lovable-uploads/1074d673-bf80-498e-8c38-12af51351c37.png" 
+              alt="OGIFY Logo" 
+              className="h-12 transition-all duration-500 hover:scale-105 drop-shadow-[0_0_15px_rgba(83,189,164,0.3)]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-ogify-accent/20 to-ogify-secondary/20 rounded-full blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-center">
             <span className="bg-gradient-to-r from-ogify-secondary to-ogify-tertiary text-transparent bg-clip-text">
               Our Leadership Team
