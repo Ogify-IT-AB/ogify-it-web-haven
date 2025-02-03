@@ -11,26 +11,35 @@ const Hero = () => {
         }}
       />
       <div className="container mx-auto px-4 z-10">
-        <div className="max-w-3xl animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+        <div className="flex justify-center mb-12">
+          <img 
+            src="/lovable-uploads/1074d673-bf80-498e-8c38-12af51351c37.png" 
+            alt="OGIFY Logo" 
+            className="h-16 md:h-20"
+          />
+        </div>
+        <div className="max-w-3xl mx-auto animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight text-center">
             <span className="text-white">Transform Your Business with</span>{" "}
             <span className="bg-gradient-to-r from-ogify-accent via-ogify-secondary to-ogify-tertiary text-transparent bg-clip-text">
               Expert IT Consulting
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-ogify-quaternary mb-12 leading-relaxed">
+          <p className="text-xl md:text-2xl text-ogify-quaternary mb-12 leading-relaxed text-center">
             We help businesses navigate digital transformation with strategic IT solutions
             and expert consulting services.
           </p>
-          <Button
-            className="bg-ogify-accent hover:bg-ogify-secondary text-white px-12 py-7 text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-ogify-accent/20"
-            onClick={() => {
-              const contact = document.getElementById("contact");
-              contact?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Get Started
-          </Button>
+          <div className="flex justify-center">
+            <Button
+              className="bg-ogify-accent hover:bg-ogify-secondary text-white px-12 py-7 text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-ogify-accent/20"
+              onClick={() => {
+                const contact = document.getElementById("contact");
+                contact?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Get Started
+            </Button>
+          </div>
         </div>
       </div>
     </div>
