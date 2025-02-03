@@ -26,11 +26,11 @@ export default {
         foreground: "hsl(var(--foreground))",
         ogify: {
           primary: "#000000",
-          accent: "#8B5CF6",
+          accent: "#53BDA4", // Blå
           light: "#111111",
-          secondary: "#D946EF",
-          tertiary: "#F97316",
-          quaternary: "#0EA5E9",
+          secondary: "#FFD384", // Gul
+          tertiary: "#53BDA4", // Blå
+          quaternary: "#FFD384", // Gul
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
