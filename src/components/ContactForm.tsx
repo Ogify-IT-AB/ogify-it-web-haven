@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
+import emailjs from "emailjs-com";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -11,14 +12,43 @@ const ContactForm = () => {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+
+    // Show loading state while sending the form
+    setIsSubmitting(true);
+
+    try {
+      // Send form data via EmailJS
+      const response = await emailjs.send(
+        "service_8a7zko6", // EmailJS service ID
+        "template_h0mfgqq", // EmailJS template ID
+        formData, // Form data
+        "SPc9YU9ZeXW-Vq8wR" // EmailJS user ID
+      );
+
+      if (response.status === 200) {
+        toast({
+          title: "Message sent!",
+          description: "We'll get back to you as soon as possible.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        toast({
+          title: "Error sending message",
+          description: "There was an issue sending your message. Please try again later.",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -64,8 +94,9 @@ const ContactForm = () => {
             <Button
               type="submit"
               className="w-full md:w-auto px-12 py-6 bg-ogify-accent hover:bg-blue-600 text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+              disabled={isSubmitting}
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </div>
