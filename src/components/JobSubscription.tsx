@@ -16,7 +16,7 @@ const JobSubscription = () => {
           </p>
           <Button
             className="inline-flex items-center gap-2 bg-ogify-tertiary hover:bg-ogify-quaternary"
-            onClick={() => window.open('https://docs.google.com/spreadsheets/create', '_blank')}
+            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfqVZaiiT_Xr-ld5FnXeuwUh-gJstwrgEcMSvKkzmx1dzoIgw/viewform?usp=dialog', '_blank')}
           >
             Subscribe to Job Updates
             <ExternalLink className="h-4 w-4" />
