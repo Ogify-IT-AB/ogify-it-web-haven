@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code2, LineChart, Shield, Smartphone } from "lucide-react";
+import { LineChart, Code2, Smartphone, FileSearch } from "lucide-react";
 
 const services = [
   {
@@ -8,9 +8,9 @@ const services = [
     icon: LineChart,
   },
   {
-    title: "Cybersecurity",
-    description: "Protect your assets with enterprise-grade security measures",
-    icon: Shield,
+    title: "Business Analysis",
+    description: "Define clear requirements to drive successful project outcomes",
+    icon: FileSearch,
   },
   {
     title: "Custom Development",
