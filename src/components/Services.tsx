@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Code2, Smartphone, FileSearch, MessageSquare } from "lucide-react";
+import { LineChart, Code2, Smartphone, FileSearch } from "lucide-react";
 
 const services = [
   {
@@ -22,11 +22,6 @@ const services = [
     description: "Engage your customers with powerful mobile applications",
     icon: Smartphone,
   },
-  {
-    title: "Slack & Process Improvement",
-    description: "Improve team communication and efficiency with our Slack experts",
-    icon: MessageSquare,
-  },
 ];
 
 const Services = () => {
@@ -39,7 +34,7 @@ const Services = () => {
             Our Services
           </span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <Card 
               key={index} 

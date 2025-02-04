@@ -5,7 +5,7 @@ const team = [
   {
     name: "Adam Vaskovic",
     role: "CEO & Founder",
-    image: "/lovable-uploads/37116c2d-bcfe-4ddd-b761-a49c3f507617.png",
+    image: "/lovable-uploads/5cd86ddf-cabd-45ba-a395-3516c084154d.png",
   }
 ];
 
