@@ -29,7 +29,7 @@ const WhyUs = () => {
           </div>
           <div className="relative h-[300px]">
             <img
-              src="photo-1605810230434-7631ac76ec81"
+              src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
               alt="Modern team collaboration"
               className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-xl opacity-75"
             />
