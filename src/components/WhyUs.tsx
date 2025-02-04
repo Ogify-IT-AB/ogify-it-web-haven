@@ -27,10 +27,10 @@ const WhyUs = () => {
               ))}
             </div>
           </div>
-          <div className="relative h-[400px]">
+          <div className="relative h-[300px]">
             <img
-              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
-              alt="Team collaboration"
+              src="photo-1605810230434-7631ac76ec81"
+              alt="Modern team collaboration"
               className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-xl opacity-75"
             />
           </div>
