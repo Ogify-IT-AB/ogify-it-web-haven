@@ -27,7 +27,7 @@ const Team = () => {
               key={index} 
               className="overflow-hidden bg-ogify-primary border-gray-800 hover:border-ogify-accent transition-all duration-300 group"
             >
-              <div className="h-[300px] relative overflow-hidden">
+              <div className="h-[400px] relative overflow-hidden">
                 <img
                   src={member.image}
                   alt={member.name}
