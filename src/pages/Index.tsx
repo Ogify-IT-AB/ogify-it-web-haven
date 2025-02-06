@@ -5,6 +5,7 @@ import JobSubscription from "@/components/JobSubscription";
 import Services from "@/components/Services";
 import Team from "@/components/Team";
 import WhyUs from "@/components/WhyUs";
+import Chatbot from "@/components/Chatbot";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <JobSubscription />
       <ContactForm />
       <Footer />
+      <Chatbot />
     </div>
   );
 };
