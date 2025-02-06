@@ -3,6 +3,7 @@ import { MessageSquare, X, Send } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,20 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
+      // First, fetch pricing information from Supabase
+      const { data: pricingData, error: pricingError } = await supabase
+        .from('pricing_info')
+        .select('*');
+
+      if (pricingError) {
+        throw new Error('Failed to fetch pricing information');
+      }
+
+      // Create a context string from the pricing data
+      const pricingContext = pricingData
+        .map(item => `${item.service_name}: ${item.description}. Price range: ${item.price_range}`)
+        .join('\n');
+
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -42,7 +57,7 @@ const Chatbot = () => {
           messages: [
             {
               role: "system",
-              content: "You are a helpful assistant that provides information about Ogify IT's services and pricing. Keep responses concise and professional. For specific pricing, suggest contacting the sales team for a customized quote.",
+              content: `You are a helpful assistant for Ogify IT. You provide information about our services and pricing. Here is our current pricing information:\n\n${pricingContext}\n\nUse this information to answer questions about our services and pricing. Keep responses concise and professional. If asked about services not listed, suggest contacting our sales team for a customized quote.`,
             },
             ...messages,
             { role: "user", content: userMessage },
@@ -60,9 +75,10 @@ const Chatbot = () => {
         { role: "assistant", content: data.choices[0].message.content },
       ]);
     } catch (error) {
+      console.error('Error:', error);
       toast({
         title: "Error",
-        description: "Failed to get response. Please check your API key and try again.",
+        description: error.message || "Failed to get response. Please check your API key and try again.",
         variant: "destructive",
       });
     } finally {
