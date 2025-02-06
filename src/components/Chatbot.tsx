@@ -8,22 +8,12 @@ import { supabase } from "@/integrations/supabase/client";
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [apiKey, setApiKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([]);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!apiKey) {
-      toast({
-        title: "API Key Required",
-        description: "Please enter your OpenAI API key to use the chatbot.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (!message.trim()) return;
 
     const userMessage = message.trim();
@@ -50,7 +40,7 @@ const Chatbot = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
         body: JSON.stringify({
           model: "gpt-4",
@@ -78,7 +68,7 @@ const Chatbot = () => {
       console.error('Error:', error);
       toast({
         title: "Error",
-        description: error.message || "Failed to get response. Please check your API key and try again.",
+        description: error.message || "Failed to get response. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -101,18 +91,6 @@ const Chatbot = () => {
               <X className="h-4 w-4" />
             </Button>
           </div>
-
-          {!apiKey && (
-            <div className="p-4 border-b">
-              <Input
-                type="password"
-                placeholder="Enter your OpenAI API key"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="w-full"
-              />
-            </div>
-          )}
 
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((msg, index) => (
