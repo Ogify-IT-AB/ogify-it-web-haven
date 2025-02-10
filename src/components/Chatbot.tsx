@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { MessageSquare, X, Send } from "lucide-react";
 import { Button } from "./ui/button";
@@ -36,14 +37,29 @@ const Chatbot = () => {
         .map(item => `${item.service_name}: ${item.description}. Price range: ${item.price_range}`)
         .join('\n');
 
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      // Get Azure OpenAI credentials from Supabase
+      const { data: secretData, error: secretError } = await supabase
+        .functions.invoke('get-secrets', {
+          body: {
+            secrets: ['AZURE_OPENAI_API_KEY', 'AZURE_OPENAI_ENDPOINT']
+          }
+        });
+
+      if (secretError) {
+        throw new Error('Failed to get Azure OpenAI credentials');
+      }
+
+      const endpoint = secretData.AZURE_OPENAI_ENDPOINT;
+      const apiKey = secretData.AZURE_OPENAI_API_KEY;
+
+      // Make request to Azure OpenAI
+      const response = await fetch(`${endpoint}/openai/deployments/gpt-4/chat/completions?api-version=2024-02-15-preview`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "api-key": apiKey,
         },
         body: JSON.stringify({
-          model: "gpt-4",
           messages: [
             {
               role: "system",
@@ -55,11 +71,12 @@ const Chatbot = () => {
         }),
       });
 
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error.message);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'Failed to get response from Azure OpenAI');
       }
 
+      const data = await response.json();
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: data.choices[0].message.content },
