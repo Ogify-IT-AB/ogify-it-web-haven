@@ -54,7 +54,7 @@ const Chatbot = () => {
       const apiKey = secretData.AZURE_OPENAI_API_KEY;
 
       // Make request to Azure OpenAI
-      const response = await fetch(`${endpoint}/openai/deployments/gpt-4/chat/completions?api-version=2024-02-15-preview`, {
+      const response = await fetch(`${endpoint}openai/deployments/gpt-4o-mini-2/chat/completions?api-version=2024-08-01-preview`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
