@@ -38,29 +38,29 @@ const Chatbot = () => {
         .map(item => `${item.service_name}: ${item.description}. Price range: ${item.price_range}`)
         .join('\n');
 
-      // Get Azure OpenAI credentials from Supabase
+      // Get OpenAI API key from Supabase
       const { data: secretData, error: secretError } = await supabase
         .functions.invoke('get-secrets', {
           body: {
-            secrets: ['AZURE_OPENAI_API_KEY', 'AZURE_OPENAI_ENDPOINT']
+            secrets: ['OPENAI_API_KEY']
           }
         });
 
       if (secretError) {
-        throw new Error('Failed to get Azure OpenAI credentials');
+        throw new Error('Failed to get OpenAI API key');
       }
 
-      const endpoint = secretData.AZURE_OPENAI_ENDPOINT;
-      const apiKey = secretData.AZURE_OPENAI_API_KEY;
+      const apiKey = secretData.OPENAI_API_KEY;
 
-      // Make request to Azure OpenAI - now using gpt-4o-mini model
-      const response = await fetch(`${endpoint}openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview`, {
+      // Make request to OpenAI
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "api-key": apiKey,
+          "Authorization": `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
+          model: "gpt-4o-mini",
           messages: [
             {
               role: "system",
@@ -74,7 +74,7 @@ const Chatbot = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'Failed to get response from Azure OpenAI');
+        throw new Error(errorData.error?.message || 'Failed to get response from OpenAI');
       }
 
       const data = await response.json();
