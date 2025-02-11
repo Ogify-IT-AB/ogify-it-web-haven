@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MessageSquare, X, Send } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -13,6 +12,21 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([]);
   const { toast } = useToast();
+
+  // Your Knowledge Base for additional answers
+  const knowledgeBase = [
+    { question: "What services does Ogify provide?", answer: "Ogify provides IT consulting, software development, and cloud services." },
+    { question: "How can I contact Ogify?", answer: "You can contact Ogify via email at info@ogify.se" },
+    { question: "Who is the owner of Ogify?", answer: "Adam Vaskovic" },
+    // Add more FAQ entries here
+  ];
+
+  useEffect(() => {
+    if (isOpen) {
+      // Add the welcome message when the chatbot is opened
+      setMessages([{ role: "assistant", content: "Welcome to Ogify Chat! How can I assist you today?" }]);
+    }
+  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +51,11 @@ const Chatbot = () => {
       const pricingContext = pricingData
         .map(item => `${item.service_name}: ${item.description}. Price range: ${item.price_range}`)
         .join('\n');
+
+      // Create the knowledge base context
+      const knowledgeBaseContext = knowledgeBase
+        .map(item => `Q: ${item.question}\nA: ${item.answer}`)
+        .join('\n\n');
 
       // Get OpenAI API key from Supabase
       const { data: secretData, error: secretError } = await supabase
@@ -64,7 +83,10 @@ const Chatbot = () => {
           messages: [
             {
               role: "system",
-              content: `You are a helpful assistant for Ogify IT. You provide information about our services and pricing. Here is our current pricing information:\n\n${pricingContext}\n\nUse this information to answer questions about our services and pricing. Keep responses concise and professional. If asked about services not listed, suggest contacting our sales team for a customized quote. Feel free to use markdown formatting to make your responses more readable.`,
+              content: `You are a helpful assistant for Ogify IT. You provide concise, clear, and professional answers about Ogify's services and pricing, 
+              as well as frequently asked questions (FAQs) from our knowledge base. Keep your responses short and to the point. If the user asks about 
+              anything unrelated to Ogify, politely inform them that you can only answer questions related to Ogify's services and knowledge base. 
+              Here's our current pricing information:\n\n${pricingContext}\n\nOur knowledge base:\n\n${knowledgeBaseContext}`,
             },
             ...messages,
             { role: "user", content: userMessage },
@@ -114,16 +136,10 @@ const Chatbot = () => {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex ${
-                  msg.role === "user" ? "justify-end" : "justify-start"
-                }`}
+                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
-                    msg.role === "user"
-                      ? "bg-ogify-accent text-white"
-                      : "bg-gray-100 text-gray-800"
-                  }`}
+                  className={`max-w-[80%] p-3 rounded-lg ${msg.role === "user" ? "bg-ogify-accent text-white" : "bg-gray-100 text-gray-800"}`}
                 >
                   {msg.role === "assistant" ? (
                     <ReactMarkdown className="prose prose-sm max-w-none dark:prose-invert prose-p:leading-relaxed prose-pre:p-0">
@@ -137,9 +153,7 @@ const Chatbot = () => {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 text-gray-800 p-3 rounded-lg">
-                  Typing...
-                </div>
+                <div className="bg-gray-100 text-gray-800 p-3 rounded-lg">Typing...</div>
               </div>
             )}
           </div>
