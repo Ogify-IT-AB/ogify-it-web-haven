@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import ReactMarkdown from "react-markdown";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +64,7 @@ const Chatbot = () => {
           messages: [
             {
               role: "system",
-              content: `You are a helpful assistant for Ogify IT. You provide information about our services and pricing. Here is our current pricing information:\n\n${pricingContext}\n\nUse this information to answer questions about our services and pricing. Keep responses concise and professional. If asked about services not listed, suggest contacting our sales team for a customized quote.`,
+              content: `You are a helpful assistant for Ogify IT. You provide information about our services and pricing. Here is our current pricing information:\n\n${pricingContext}\n\nUse this information to answer questions about our services and pricing. Keep responses concise and professional. If asked about services not listed, suggest contacting our sales team for a customized quote. Feel free to use markdown formatting to make your responses more readable.`,
             },
             ...messages,
             { role: "user", content: userMessage },
@@ -124,7 +125,13 @@ const Chatbot = () => {
                       : "bg-gray-100 text-gray-800"
                   }`}
                 >
-                  {msg.content}
+                  {msg.role === "assistant" ? (
+                    <ReactMarkdown className="prose prose-sm max-w-none dark:prose-invert prose-p:leading-relaxed prose-pre:p-0">
+                      {msg.content}
+                    </ReactMarkdown>
+                  ) : (
+                    msg.content
+                  )}
                 </div>
               </div>
             ))}
